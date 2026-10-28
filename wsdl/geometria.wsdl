@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GeometriaService"
+                  targetNamespace="http://example.com/soap/geometria"
+                  xmlns:tns="http://example.com/soap/geometria"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <!-- 1. DEFINICIÓN DE TIPOS Y ESQUEMA XML (XSD) -->
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://example.com/soap/geometria"
+                elementFormDefault="qualified">
+      
+      <!-- Elementos para AreaRectangulo -->
+      <xsd:element name="AreaRectanguloRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="base" type="xsd:double"/>
+            <xsd:element name="altura" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="AreaRectanguloResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="area" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Elementos para PerimetroRectangulo -->
+      <xsd:element name="PerimetroRectanguloRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="base" type="xsd:double"/>
+            <xsd:element name="altura" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="PerimetroRectanguloResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="perimetro" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- 2. MENSAJES DE ENTRADA Y SALIDA -->
+  <wsdl:message name="AreaRectanguloInput">
+    <wsdl:part name="parameters" element="tns:AreaRectanguloRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AreaRectanguloOutput">
+    <wsdl:part name="parameters" element="tns:AreaRectanguloResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="PerimetroRectanguloInput">
+    <wsdl:part name="parameters" element="tns:PerimetroRectanguloRequest"/>
+  </wsdl:message>
+  <wsdl:message name="PerimetroRectanguloOutput">
+    <wsdl:part name="parameters" element="tns:PerimetroRectanguloResponse"/>
+  </wsdl:message>
+
+  <!-- 3. PUERTO DE TIPO (INTERFACE / OPERACIONES) -->
+  <wsdl:portType name="GeometriaPortType">
+    <wsdl:operation name="AreaRectangulo">
+      <wsdl:documentation>Calcula el área de un rectángulo a partir de su base y altura</wsdl:documentation>
+      <wsdl:input message="tns:AreaRectanguloInput"/>
+      <wsdl:output message="tns:AreaRectanguloOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="PerimetroRectangulo">
+      <wsdl:documentation>Calcula el perímetro de un rectángulo a partir de su base y altura</wsdl:documentation>
+      <wsdl:input message="tns:PerimetroRectanguloInput"/>
+      <wsdl:output message="tns:PerimetroRectanguloOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- 4. VINCULACIÓN (BINDING SOAP 1.1) -->
+  <wsdl:binding name="GeometriaBinding" type="tns:GeometriaPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    
+    <wsdl:operation name="AreaRectangulo">
+      <soap:operation soapAction="AreaRectangulo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="PerimetroRectangulo">
+      <soap:operation soapAction="PerimetroRectangulo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- 5. DEFINICIÓN DEL SERVICIO Y ENDPOINT -->
+  <wsdl:service name="GeometriaService">
+    <wsdl:documentation>Servicio Web SOAP para cálculos geométricos</wsdl:documentation>
+    <wsdl:port name="GeometriaPort" binding="tns:GeometriaBinding">
+      <soap:address location="http://localhost:3000/soap/geometria"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,24 @@
+{
+  "name": "practica-servicio-web-soap",
+  "version": "1.0.0",
+  "description": "Servicios Web SOAP modulares con Node.js, Express y la librería soap",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [
+    "soap",
+    "wsdl",
+    "express",
+    "nodejs",
+    "xml"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "soap": "^1.1.0"
+  }
+}

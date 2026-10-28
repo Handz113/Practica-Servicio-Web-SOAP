@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ConversionesService"
+                  targetNamespace="http://example.com/soap/conversiones"
+                  xmlns:tns="http://example.com/soap/conversiones"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <!-- 1. DEFINICIÓN DE TIPOS Y ESQUEMA XML (XSD) -->
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://example.com/soap/conversiones"
+                elementFormDefault="qualified">
+      
+      <!-- Elementos para CelsiusAFahrenheit -->
+      <xsd:element name="CelsiusAFahrenheitRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="celsius" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="CelsiusAFahrenheitResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fahrenheit" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Elementos para KilometrosAMillas -->
+      <xsd:element name="KilometrosAMillasRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kilometros" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="KilometrosAMillasResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="millas" type="xsd:double"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- 2. MENSAJES DE ENTRADA Y SALIDA -->
+  <wsdl:message name="CelsiusAFahrenheitInput">
+    <wsdl:part name="parameters" element="tns:CelsiusAFahrenheitRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CelsiusAFahrenheitOutput">
+    <wsdl:part name="parameters" element="tns:CelsiusAFahrenheitResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="KilometrosAMillasInput">
+    <wsdl:part name="parameters" element="tns:KilometrosAMillasRequest"/>
+  </wsdl:message>
+  <wsdl:message name="KilometrosAMillasOutput">
+    <wsdl:part name="parameters" element="tns:KilometrosAMillasResponse"/>
+  </wsdl:message>
+
+  <!-- 3. PUERTO DE TIPO (INTERFACE / OPERACIONES) -->
+  <wsdl:portType name="ConversionesPortType">
+    <wsdl:operation name="CelsiusAFahrenheit">
+      <wsdl:documentation>Convierte grados Celsius a Fahrenheit</wsdl:documentation>
+      <wsdl:input message="tns:CelsiusAFahrenheitInput"/>
+      <wsdl:output message="tns:CelsiusAFahrenheitOutput"/>
+    </wsdl:operation>
+    <wsdl:operation name="KilometrosAMillas">
+      <wsdl:documentation>Convierte kilómetros a millas</wsdl:documentation>
+      <wsdl:input message="tns:KilometrosAMillasInput"/>
+      <wsdl:output message="tns:KilometrosAMillasOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- 4. VINCULACIÓN (BINDING SOAP 1.1) -->
+  <wsdl:binding name="ConversionesBinding" type="tns:ConversionesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    
+    <wsdl:operation name="CelsiusAFahrenheit">
+      <soap:operation soapAction="CelsiusAFahrenheit"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="KilometrosAMillas">
+      <soap:operation soapAction="KilometrosAMillas"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- 5. DEFINICIÓN DEL SERVICIO Y ENDPOINT -->
+  <wsdl:service name="ConversionesService">
+    <wsdl:documentation>Servicio Web SOAP para conversiones de unidades</wsdl:documentation>
+    <wsdl:port name="ConversionesPort" binding="tns:ConversionesBinding">
+      <soap:address location="http://localhost:3000/soap/conversiones"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
