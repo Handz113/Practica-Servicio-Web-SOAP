@@ -36,34 +36,6 @@ Practica-Servicio-Web-SOAP/
     └── perimetroRectangulo_request.xml
 ```
 
----
-
-## ⚙️ Requisitos Previos
-
-- **Node.js**: Versión 18.x o superior (soporte nativo para ES Modules).
-- **NPM**: Versión 9.x o superior.
-- **Cliente SOAP / HTTP**: Postman, Insomnia, SoapUI o `curl`.
-
----
-
-## 🚀 Instalación y Ejecución
-
-### 1. Clonar o acceder al directorio del proyecto:
-```bash
-cd "c:\Users\Juanm\OneDrive\Documents\Universidad\Semestre 7\Servicios_Web\Practica-Servicio-Web-SOAP"
-```
-
-### 2. Instalar dependencias:
-```bash
-npm install
-```
-
-### 3. Iniciar el servidor:
-
-- **Modo Producción / Estándar:**
-  ```bash
-  npm start
-  ```
 
 - **Modo Desarrollo (con reinicio automático al guardar cambios):**
   ```bash
